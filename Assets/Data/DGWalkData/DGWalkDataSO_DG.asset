@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f52a8db40bc48f4db92cab09148037e, type: 3}
   m_Name: DGWalkDataSO_DG
   m_EditorClassIdentifier: 
-  Repeats: 10
-  WalkLength: 10
-  StartRandomlyEachIteration: 1
+  Repeats: 5
+  WalkLength: 7
+  IsRandomStartPos: 0
+  StartPos: {x: 0, y: 0}
+  MinRoomWidth: 4
+  MinRoomHeight: 4
+  DGWidth: 20
+  DGHeight: 20
+  Offset: 1

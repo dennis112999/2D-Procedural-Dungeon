@@ -30,5 +30,36 @@ namespace DG.Data
         /// </summary>
         [Tooltip("The start pos for walk process")]
         public Vector2Int StartPos = Vector2Int.zero;
+
+
+        /// <summary>
+        /// Minimum width of a room in the dungeon.
+        /// </summary>
+        [Tooltip("Minimum width of a room in the dungeon")]
+        [Min(1)] public int MinRoomWidth = 4;
+
+        /// <summary>
+        /// Minimum height of a room in the dungeon.
+        /// </summary>
+        [Tooltip("Minimum height of a room in the dungeon")]
+        [Min(1)] public int MinRoomHeight = 4;
+
+        /// <summary>
+        /// Width of the dungeon generation area.
+        /// </summary>
+        [Tooltip("Width of the dungeon generation area")]
+        [Min(1)] public int DGWidth = 20;
+
+        /// <summary>
+        /// Height of the dungeon generation area.
+        /// </summary>
+        [Tooltip("Height of the dungeon generation area")]
+        [Min(1)] public int DGHeight = 20;
+
+        /// <summary>
+        /// Offset value to adjust room positions and spacing.
+        /// </summary>
+        [Tooltip("Offset value to adjust room positions and spacing")]
+        [Range(0, 10)] public int Offset = 1;
     }
 }

@@ -19,9 +19,11 @@ namespace DG.Gameplay
         public void GenerateDungeon()
         {
             _tilemapController.Clear();
-            
-            HashSet<Vector2Int> floorPositions = GenerateDungeonFloor();
-            GenerateDungeonWall(floorPositions);
+
+            //HashSet<Vector2Int> floorPositions = GenerateDungeonFloor();
+            //GenerateDungeonWall(floorPositions);
+
+            CreateRooms();
         }
 
         public void ClearDungeon()
@@ -71,6 +73,50 @@ namespace DG.Gameplay
         }
 
         #endregion Dungeon
+
+        #region Room
+
+        /// <summary>
+        /// Creates rooms
+        /// </summary>
+        private void CreateRooms()
+        {
+            // Convert dungeon rooms
+            var roomList = DGAlgorithms.BinarySpacePartitioning(new BoundsInt((Vector3Int)_dgWalkDataSO.StartPos, new Vector3Int(_dgWalkDataSO.DGWidth, _dgWalkDataSO.DGHeight, 0)),
+                _dgWalkDataSO.MinRoomWidth, _dgWalkDataSO.MinRoomHeight);
+
+            // Create floor positions
+            HashSet<Vector2Int> floorPositions = CreateSampleRooms(roomList, _dgWalkDataSO.Offset);
+            _tilemapController.PaintFloorTiles(floorPositions);
+        }
+
+        /// <summary>
+        /// Generates floor positions for rooms
+        /// </summary>
+        /// <param name="roomList">List of rooms</param>
+        /// <param name="offset">Offset to leave as a border around the room</param>
+        /// <returns>all floor positions</returns>
+        private HashSet<Vector2Int> CreateSampleRooms(List<BoundsInt> roomList, int offset)
+        {
+            HashSet<Vector2Int> floor = new HashSet<Vector2Int>();
+
+            foreach (var room in roomList)
+            {
+                for (int col = offset; col < room.size.x - offset; col++)
+                {
+                    for (int row = offset; row < room.size.y - offset; row++)
+                    {
+                        // Calculate the absolute position
+                        Vector2Int pos = (Vector2Int)room.min + new Vector2Int(col, row);
+                        floor.Add(pos);
+                    }
+                }
+            }
+
+            return floor;
+        }
+
+        #endregion Room
     }
 
 }
