@@ -21,10 +21,19 @@ namespace DG.Gameplay
         {
             base.OnInspectorGUI();
 
+            EditorGUILayout.BeginHorizontal();
+
             if (GUILayout.Button("Create Dungeon"))
             {
                 dungeonGenerator.GenerateDungeon();
             }
+
+            if (GUILayout.Button("Clear Dungeon"))
+            {
+                dungeonGenerator.ClearDungeon();
+            }
+
+            EditorGUILayout.EndHorizontal();
         }
     }
 

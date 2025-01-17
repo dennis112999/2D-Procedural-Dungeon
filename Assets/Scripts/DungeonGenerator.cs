@@ -22,6 +22,11 @@ namespace DG.Gameplay
             GenerateDungeonFloor();
         }
 
+        public void ClearDungeon()
+        {
+            _tilemapController.Clear();
+        }
+
         private void GenerateDungeonFloor()
         {
             HashSet<Vector2Int> floorPos = RunRandomWalk(_dgWalkDataSO, _dgWalkDataSO.StartPos);
