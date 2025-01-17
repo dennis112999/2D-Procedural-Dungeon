@@ -19,7 +19,9 @@ namespace DG.Gameplay
         public void GenerateDungeon()
         {
             _tilemapController.Clear();
-            GenerateDungeonFloor();
+            
+            HashSet<Vector2Int> floorPositions = GenerateDungeonFloor();
+            GenerateDungeonWall(floorPositions);
         }
 
         public void ClearDungeon()
@@ -27,10 +29,26 @@ namespace DG.Gameplay
             _tilemapController.Clear();
         }
 
-        private void GenerateDungeonFloor()
+        /// <summary>
+        /// Generate Dungeon Floor
+        /// </summary>
+        /// <returns></returns>
+        private HashSet<Vector2Int> GenerateDungeonFloor()
         {
-            HashSet<Vector2Int> floorPos = RunRandomWalk(_dgWalkDataSO, _dgWalkDataSO.StartPos);
-            _tilemapController.PaintFloorTiles(floorPos);
+            HashSet<Vector2Int> floorPositions = RunRandomWalk(_dgWalkDataSO, _dgWalkDataSO.StartPos);
+            _tilemapController.PaintFloorTiles(floorPositions);
+
+            return floorPositions;
+        }
+
+        /// <summary>
+        /// Generate Dungeon Wall
+        /// </summary>
+        /// <param name="floorPositions">floor Positions</param>
+        private void GenerateDungeonWall(HashSet<Vector2Int> floorPositions)
+        {
+           HashSet<Vector2Int> wallPositions = WallGenerator.FindWallsInDirections(floorPositions, Maths.BasicDirectionsList);
+           _tilemapController.PaintWallTiles(wallPositions);
         }
 
         private HashSet<Vector2Int> RunRandomWalk(DGWalkDataSO DGWalkDataSO, Vector2Int pos)

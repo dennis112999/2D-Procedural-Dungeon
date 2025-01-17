@@ -19,6 +19,11 @@ namespace DG.Gameplay
             PaintTiles(floorPos, _floorTileMap, _tileDataSO.Floor);
         }
 
+        public void PaintWallTiles(IEnumerable<Vector2Int> wallPositions)
+        {
+            PaintTiles(wallPositions, _wallTileMap, _tileDataSO.Wall);
+        }
+
         private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, TileBase tile)
         {
             foreach (var pos in positions)
@@ -30,6 +35,7 @@ namespace DG.Gameplay
         public void Clear()
         {
             _floorTileMap.ClearAllTiles();
+            _wallTileMap.ClearAllTiles();
         }
 
         #region Tile
