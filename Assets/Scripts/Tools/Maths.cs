@@ -16,5 +16,10 @@ namespace Tools
             new Vector2Int(-1,0), // Left
         };
 
+        public static Vector2Int GetRandomBasicDirection()
+        {
+            return BasicDirectionsList[Random.Range(0, BasicDirectionsList.Count)];
+        }
+
     }
 }
