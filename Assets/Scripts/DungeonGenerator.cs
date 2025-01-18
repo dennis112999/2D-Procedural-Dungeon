@@ -20,10 +20,15 @@ namespace DG.Gameplay
         {
             _tilemapController.Clear();
 
-            //HashSet<Vector2Int> floorPositions = GenerateDungeonFloor();
-            //GenerateDungeonWall(floorPositions);
-
-            CreateRooms();
+            if(_dgWalkDataSO.EnableRoomDGGeneration)
+            {
+                CreateRooms();
+            }
+            else
+            {
+                HashSet<Vector2Int> floorPositions = GenerateDungeonFloor();
+                GenerateDungeonWall(floorPositions);
+            }
         }
 
         public void ClearDungeon()
