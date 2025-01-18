@@ -86,7 +86,16 @@ namespace DG.Gameplay
                 _dgWalkDataSO.MinRoomWidth, _dgWalkDataSO.MinRoomHeight);
 
             // Create floor positions
-            HashSet<Vector2Int> floorPositions = CreateSampleRooms(roomList, _dgWalkDataSO.Offset);
+            HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
+
+            if (_dgWalkDataSO.IsRandomStartPos)
+            {
+                floorPositions = CreateRoomsRandomly(roomList);
+            }
+            else
+            {
+                floorPositions = CreateSampleRooms(roomList, _dgWalkDataSO.Offset);
+            }
 
             // Connect Rooms
             List<Vector2Int> roomCenters = GetRoomCenters(roomList);
@@ -167,6 +176,45 @@ namespace DG.Gameplay
             }
 
             return floor;
+        }
+
+        private HashSet<Vector2Int> CreateRoomsRandomly(List<BoundsInt> roomList)
+        {
+            HashSet<Vector2Int> floor = new HashSet<Vector2Int>();
+
+            foreach (var roomBounds in roomList)
+            {
+                // Calculate the center of the room
+                var roomCenter = new Vector2Int(Mathf.RoundToInt(roomBounds.center.x), Mathf.RoundToInt(roomBounds.center.y));
+                var roomFloor = RunRandomWalk(_dgWalkDataSO, roomCenter);
+
+                // Add valid positions to the floor set
+                AddValidFloorPositions(roomBounds, roomFloor, floor);
+            }
+
+            return floor;
+        }
+
+        /// <summary>
+        /// Add valid positions to the floor set
+        /// </summary>
+        /// <param name="roomBounds">Bounds of the room</param>
+        /// <param name="roomFloor">Generated floor positions from random walk</param>
+        /// <param name="floor">The set to store valid floor positions</param>
+        private void AddValidFloorPositions(BoundsInt roomBounds, HashSet<Vector2Int> roomFloor, HashSet<Vector2Int> floor)
+        {
+            int xMin = roomBounds.xMin + _dgWalkDataSO.Offset;
+            int xMax = roomBounds.xMax - _dgWalkDataSO.Offset;
+            int yMin = roomBounds.yMin + _dgWalkDataSO.Offset;
+            int yMax = roomBounds.yMax - _dgWalkDataSO.Offset;
+
+            foreach (var pos in roomFloor)
+            {
+                if (pos.x >= xMin && pos.x <= xMax && pos.y >= yMin && pos.y <= yMax)
+                {
+                    floor.Add(pos);
+                }
+            }
         }
 
         #endregion Room
