@@ -95,6 +95,9 @@ namespace DG.Gameplay
 
             // Paint Floor Tiles
             _tilemapController.PaintFloorTiles(floorPositions);
+
+            // Paint Wall Tiles
+            GenerateDungeonWall(floorPositions);
         }
 
         /// <summary>
