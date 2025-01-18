@@ -87,7 +87,57 @@ namespace DG.Gameplay
 
             // Create floor positions
             HashSet<Vector2Int> floorPositions = CreateSampleRooms(roomList, _dgWalkDataSO.Offset);
+
+            // Connect Rooms
+            List<Vector2Int> roomCenters = GetRoomCenters(roomList);
+            HashSet<Vector2Int> roadPositions = ConnectRooms(roomCenters);
+            floorPositions.UnionWith(roadPositions);
+
+            // Paint Floor Tiles
             _tilemapController.PaintFloorTiles(floorPositions);
+        }
+
+        /// <summary>
+        /// Connect Rooms
+        /// </summary>
+        /// <param name="roomList"></param>
+        /// <returns></returns>
+        private List<Vector2Int> GetRoomCenters(List<BoundsInt> roomList)
+        {
+            List<Vector2Int> roomCenters = new List<Vector2Int>();
+            foreach (var room in roomList)
+            {
+                roomCenters.Add(((Vector2Int)Vector3Int.RoundToInt(room.center)));
+            }
+
+            return roomCenters;
+        }
+
+        /// <summary>
+        /// Connect Rooms
+        /// </summary>
+        /// <param name="roomCenters">room Centers</param>
+        /// <returns>roads</returns>
+        private HashSet<Vector2Int> ConnectRooms(List<Vector2Int> roomCenters)
+        {
+            HashSet<Vector2Int> rooms = new HashSet<Vector2Int>();
+
+            // Randomly select the starting room center
+            var curRoomCenter = roomCenters[Random.Range(0, roomCenters.Count)];
+            roomCenters.Remove(curRoomCenter);
+
+            while (roomCenters.Count > 0)
+            {
+                Vector2Int closeset = Maths.FindClosestPoint(curRoomCenter, roomCenters);
+                roomCenters.Remove(closeset);
+
+                HashSet<Vector2Int> newCorridor = CreateRoad(curRoomCenter, closeset);
+                
+                curRoomCenter = closeset;
+                rooms.UnionWith(newCorridor);
+            }
+
+            return rooms;
         }
 
         /// <summary>
@@ -117,6 +167,56 @@ namespace DG.Gameplay
         }
 
         #endregion Room
+
+        #region Road
+
+        private HashSet<Vector2Int> CreateRoad(Vector2Int curRoomCenter, Vector2Int destination)
+        {
+            HashSet<Vector2Int> road = new HashSet<Vector2Int>();
+            var pos = curRoomCenter;
+            road.Add(pos);
+
+            MoveVertically(ref pos, destination.y, road);
+            MoveHorizontally(ref pos, destination.x, road);
+
+            return road;
+        }
+
+        private void MoveVertically(ref Vector2Int pos, int targetY, HashSet<Vector2Int> road)
+        {
+            while (pos.y != targetY)
+            {
+                if (targetY > pos.y)
+                {
+                    pos += Vector2Int.up;
+                }
+                else if (targetY < pos.y)
+                {
+                    pos += Vector2Int.down;
+                }
+
+                road.Add(pos);
+            }
+        }
+
+        private void MoveHorizontally(ref Vector2Int pos, int targetX, HashSet<Vector2Int> road)
+        {
+            while (pos.x != targetX)
+            {
+                if (targetX > pos.x)
+                {
+                    pos += Vector2Int.right;
+                }
+                else if (targetX < pos.x)
+                {
+                    pos += Vector2Int.left;
+                }
+
+                road.Add(pos);
+            }
+        }
+
+        #endregion Road
     }
 
 }

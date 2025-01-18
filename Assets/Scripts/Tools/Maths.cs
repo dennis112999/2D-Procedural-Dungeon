@@ -21,5 +21,29 @@ namespace Tools
             return BasicDirectionsList[Random.Range(0, BasicDirectionsList.Count)];
         }
 
+        /// <summary>
+        /// Find Closest Point
+        /// </summary>
+        /// <param name="curPos">current Pos</param>
+        /// <param name="checkPoints">check Points List</param>
+        /// <returns></returns>
+        public static Vector2Int FindClosestPoint(Vector2Int curPos, List<Vector2Int> checkPoints)
+        {
+            Vector2Int closestPos = Vector2Int.zero;
+            float length = float.MaxValue;
+
+            foreach (Vector2Int pos in checkPoints)
+            {
+                float curDis = Vector2.Distance(curPos, pos);
+                if (curDis < length)
+                {
+                    length = curDis;
+                    closestPos = pos;
+                }
+            }
+
+            return closestPos;
+        }
+
     }
 }
