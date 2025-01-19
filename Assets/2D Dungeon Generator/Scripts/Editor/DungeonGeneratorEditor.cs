@@ -19,6 +19,16 @@ namespace DG.Gameplay
 
         public override void OnInspectorGUI()
         {
+            GUILayout.Label("Click here to visit wiki!", EditorStyles.linkLabel);
+            Rect rect = GUILayoutUtility.GetLastRect();
+            EditorGUIUtility.AddCursorRect(rect, MouseCursor.Link);
+
+            Event currentEvent = Event.current;
+            if (currentEvent.type == EventType.MouseDown && rect.Contains(currentEvent.mousePosition))
+            {
+                Help.BrowseURL("https://github.com/dennis112999/2D-Procedural-Dungeon?tab=readme-ov-file");
+            }
+
             base.OnInspectorGUI();
 
             EditorGUILayout.BeginHorizontal();
