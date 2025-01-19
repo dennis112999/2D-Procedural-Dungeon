@@ -54,8 +54,10 @@ namespace DG.Gameplay
         /// <param name="floorPositions">floor Positions</param>
         private void GenerateDungeonWall(HashSet<Vector2Int> floorPositions)
         {
-           HashSet<Vector2Int> wallPositions = WallGenerator.FindWallsInDirections(floorPositions, Maths.BasicDirectionsList);
-           _tilemapController.PaintWallTiles(wallPositions);
+            HashSet<Vector2Int> cornerPositions = WallGenerator.FindWallsInDirections(floorPositions, Maths.EightDirections);
+            Dictionary<Vector2Int, string> cornerBinaryMap = WallGenerator.CalculateWallNeighborTypes(cornerPositions, floorPositions);
+
+            _tilemapController.PaintSingleWall(cornerBinaryMap);
         }
 
         private HashSet<Vector2Int> RunRandomWalk(DGWalkDataSO DGWalkDataSO, Vector2Int pos)
