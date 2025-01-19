@@ -12,5 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e61ea923e498289448a6c860886b76b3, type: 3}
   m_Name: TileDataSO_DG
   m_EditorClassIdentifier: 
-  Floor: {fileID: 11400000, guid: 6b7acfea92e552e449623e0936c9de96, type: 2}
-  Wall: {fileID: 11400000, guid: 0b3a9e541d30658409a88daf407211b0, type: 2}
+  Floor: {fileID: 11400000, guid: e1d49d5d90aaea442b438da5ea7e397a, type: 2}
+  Wall_Top: {fileID: 11400000, guid: 0b3a9e541d30658409a88daf407211b0, type: 2}
+  Wall_SideRight: {fileID: 11400000, guid: 32f8abab03c40434680d4aaedf75ad86, type: 2}
+  Wall_Bottom: {fileID: 11400000, guid: 78ff5cc8f9fff83468b04a61084490b1, type: 2}
+  Wall_SideLeft: {fileID: 11400000, guid: 6b7acfea92e552e449623e0936c9de96, type: 2}
+  Wall_InnerConerDownLeft: {fileID: 11400000, guid: e78aae21b688dd04e8d4ac971a811d3b, type: 2}
+  Wall_InnerConerDownRight: {fileID: 11400000, guid: 53d5155c29bc14d41a23caee78513386, type: 2}
+  Wall_InnerConerUpLeft: {fileID: 11400000, guid: e76b0779ab2918d469e6948d3903f10e, type: 2}
+  Wall_InnerConerUpRight: {fileID: 11400000, guid: 9f8c1933c9faeff4d9965a8eb1d710df, type: 2}
+  Wall_DiagonaCornerDownLeft: {fileID: 11400000, guid: d889bd3622eae0346a4bee74171692f8, type: 2}
+  Wall_DiagonaCornerDownRight: {fileID: 11400000, guid: 4e5688f22abe29f48983c1ff5e41e32e, type: 2}
+  Wall_DiagonaCornerUpLeft: {fileID: 11400000, guid: c06cd0e8b8933bb489df8a87f3142789, type: 2}
+  Wall_DiagonaCornerUpRight: {fileID: 11400000, guid: 2c832bd1b3c22bf47bb8e3f99c69afa7, type: 2}
+  Wall_SideFull: {fileID: 11400000, guid: 84234e66fe1a65d45b6e8fd0f43e4dff, type: 2}
+  Wall_IslandHorizontalLeft: {fileID: 11400000, guid: 495dad752fdd9cd4187e92c64611e5b4, type: 2}
+  Wall_IslandHorizontalMiddle: {fileID: 11400000, guid: 74de1f18bd55bcf459856c41cfa4e9b9, type: 2}
+  Wall_IslandHorizontalRight: {fileID: 11400000, guid: a62159c52bb6aa7489ccaad59b306939, type: 2}
+  Wall_IslandVerticalTop: {fileID: 11400000, guid: a4390641f5279b04c8bde2b29afa9bbe, type: 2}
+  Wall_IslandVerticalMiddle: {fileID: 11400000, guid: eca66f1c4af913044a29d44495d88e51, type: 2}
+  Wall_IslandVerticalBottom: {fileID: 11400000, guid: 577725c592cccfa49be90eee204d5a2c, type: 2}

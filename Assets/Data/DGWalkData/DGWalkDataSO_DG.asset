@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Repeats: 5
   WalkLength: 7
-  IsRandomStartPos: 0
+  IsRandomStartPos: 1
   StartPos: {x: 0, y: 0}
+  EnableRoomDGGeneration: 1
   MinRoomWidth: 4
   MinRoomHeight: 4
   DGWidth: 20
