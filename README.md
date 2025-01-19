@@ -1,4 +1,4 @@
-# 2D Dungeon Generator
+# 2D-Procedural-Dungeon
  
 A Unity-based procedural dungeon generation system featuring room creation, wall generation, and pathfinding. The project leverages ScriptableObjects for flexible customization and easy configuration.
 
@@ -22,7 +22,7 @@ https://github.com/user-attachments/assets/9413f9ea-fc7a-4178-b41b-02da953fe8e1
     - Random walk algorithms for organic dungeon layouts.
     - EightDirections wall placement for enhanced visual variety.
 
-For detailed setup, usage, and advanced configurations, please refer to the [Wiki](https://github.com/dennis112999/Unity-Custom-Folder-Icons/wiki).
+For detailed setup, usage, and advanced configurations, please refer to the [Wiki](https://github.com/dennis112999/2D-Procedural-Dungeon/wiki).
 
 # Unity Version
     - 2022.3.36f1 or later.
